@@ -1,16 +1,17 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
-
 # Özel Kullanıcı -- settings özelleştirme
 class User(AbstractUser):
     pass 
 
 
+# Temsilci
 class Agent(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
     # lead = models.ForeignKey("Lead", on_delete=CASCADE)
+    def __str__(self):
+        return self.user.username
 
 
 class Lead(models.Model):
@@ -31,6 +32,6 @@ class Lead(models.Model):
 
     # profil_picture = models.ImageField(blank=True, null=True)
     # spacial_files = models.FileField(blank=True, null=True)
-    
 
-
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
